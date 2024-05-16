@@ -2,7 +2,7 @@
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
 	"$id": "/IL_schema",
 	"title": "GXAI-IL-Common-Object", 
-	"description": "GXAI IL", 
+	"description": "Schema Definition of Common Object from GXAI", 
 	"type" : "object", 
 	"properties" : {
 	},
