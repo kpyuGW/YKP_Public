@@ -45,6 +45,7 @@
 				}, 
 				"required" : [ "rSuppressions", "rTriggers", "rOrders" ]
 			}
-		}, 
-	}
+		}
+	}, 
+	"required" : [ "ILs" ]
 }

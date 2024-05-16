@@ -1,23 +1,12 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"$id": "https://raw.githubusercontent.com/kpyuGW/YKP_Public/main/IL_JsonSchema_CommonObj.json",
+	"$id": "/IL_schema",
 	"title": "GXAI-IL-Triggers", 
 	"description": "Schema Definition of Triggers JSON from GXAI", 
 	"type" : "object", 
 	"properties" : {
 		"rTriggers" : {
-			"type" : "array", 
-			"items" : {
-				"type" : "object", 
-				"properties" : {
-					"triggerRules" : {
-						"type" : "array", 
-						"items" : { "$ref" : "#/$defs/objRuleContent" }, 
-						"minItems" : 1
-					}
-				}, 
-				"required" : [ "triggerRules" ]
-			}
+            "$ref" : "https://raw.githubusercontent.com/kpyuGW/YKP_Public/main/IL_JsonSchema_v2.json#/properties/ILs/items/properties/rTriggers"
 		}
 	}, 
 	"required" : [ "rTriggers" ]	

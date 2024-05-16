@@ -1,22 +1,12 @@
 {
 	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"$id": "https://raw.githubusercontent.com/kpyuGW/YKP_Public/main/IL_JsonSchema_CommonObj.json",
+	"$id": "/IL_schema",
 	"title": "GXAI-IL-Suppressions", 
 	"description": "Schema Definition of Suppressions JSON from GXAI", 
 	"type" : "object", 
 	"properties" : {
 		"rSuppressions" : {
-			"type" : "array", 
-			"items" : {
-				"type" : "object", 
-				"properties" : {
-					"suppressionRules" : {
-						"type" : "array", 
-						"items" : { "$ref" : "#/$defs/objRuleContent" }
-					}
-				}, 
-				"required" : [ "suppressionRules" ]
-			}
+            "$ref" : "https://raw.githubusercontent.com/kpyuGW/YKP_Public/main/IL_JsonSchema_v2.json#/properties/ILs/items/properties/rSuppressions"
 		}		
 	}, 
 	"required" : [ "rSuppressions" ]	
