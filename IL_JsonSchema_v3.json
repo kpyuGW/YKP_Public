@@ -1,0 +1,50 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://raw.githubusercontent.com/kpyuGW/YKP_Public/main/IL_JsonSchema_CommonObj.json",
+	"title": "GXAI-IL-Main", 
+	"description": "Schema Definition of the Main JSON from GXAI", 
+	"type" : "object", 
+	"properties" : {
+		"ILs" : {
+			"type" : "array",
+			"items" : {
+				"type" : "object", 
+				"properties" : {
+					"rSuppressions" : {
+						"type" : "array", 
+						"items" : {
+							"type" : "object", 
+							"properties" : {
+								"suppressionRules" : {
+									"type" : "array", 
+									"items" : { "$ref" : "#/$defs/objRuleContent" }
+								}
+							}, 
+							"required" : [ "suppressionRules" ]
+						}
+					}, 
+					"rTriggers" : {
+						"type" : "array", 
+						"items" : {
+							"type" : "object", 
+							"properties" : {
+								"triggerRules" : {
+									"type" : "array", 
+									"items" : { "$ref" : "#/$defs/objRuleContent" }, 
+									"minItems" : 1
+								}
+							}, 
+							"required" : [ "triggerRules" ]
+						}
+					}, 
+					"rOrders" : {
+						"type" : "array", 
+						"items" : { "$ref" : "#/$defs/objOrderRule" }, 
+						"minItems" : 1
+					}
+				}, 
+				"required" : [ "rSuppressions", "rTriggers", "rOrders" ]
+			}
+		}, 
+	}
+}
