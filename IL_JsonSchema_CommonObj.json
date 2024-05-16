@@ -2,48 +2,6 @@
 	"title": "GXAI-IL-Common-Object", 
 	"description": "GXAI IL", 
 	"type" : "object", 
-		"ILs" : {
-			"type" : "array",
-			"items" : {
-				"type" : "object", 
-				"properties" : {
-					"rSuppressions" : {
-						"type" : "array", 
-						"items" : {
-							"type" : "object", 
-							"properties" : {
-								"suppressionRules" : {
-									"type" : "array", 
-									"items" : { "$ref" : "#/$defs/objRuleContent" }
-								}
-							}, 
-							"required" : [ "suppressionRules" ]
-						}
-					}, 
-					"rTriggers" : {
-						"type" : "array", 
-						"items" : {
-							"type" : "object", 
-							"properties" : {
-								"triggerRules" : {
-									"type" : "array", 
-									"items" : { "$ref" : "#/$defs/objRuleContent" }, 
-									"minItems" : 1
-								}
-							}, 
-							"required" : [ "triggerRules" ]
-						}
-					}, 
-					"rOrders" : {
-						"type" : "array", 
-						"items" : { "$ref" : "#/$defs/objOrderRule" }, 
-						"minItems" : 1
-					}
-				}, 
-				"required" : [ "rSuppressions", "rTriggers", "rOrders" ]
-			}
-		}, 
-	},
 	"$defs" : {
 		"objOrderRule" : {
 			"type" : "object",
