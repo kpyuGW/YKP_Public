@@ -6,7 +6,7 @@
 	"type" : "object", 
 	"properties" : {
 		"rSuppressions" : {
-            "$ref" : "https://raw.githubusercontent.com/kpyuGW/YKP_Public/main/IL_JsonSchema_v2.json#/properties/ILs/items/properties/rSuppressions"
+            "$ref" : "https://raw.githubusercontent.com/kpyuGW/YKP_Public/main/IL_JsonSchema_v3.json#/properties/ILs/items/properties/rSuppressions"
 		}		
 	}, 
 	"required" : [ "rSuppressions" ]	
