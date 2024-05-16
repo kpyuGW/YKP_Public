@@ -2,6 +2,8 @@
 	"title": "GXAI-IL-Common-Object", 
 	"description": "GXAI IL", 
 	"type" : "object", 
+	"properties" : {
+	},
 	"$defs" : {
 		"objOrderRule" : {
 			"type" : "object",
