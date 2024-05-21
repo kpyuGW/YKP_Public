@@ -1,0 +1,312 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "/IL_schema",
+	"title": "GXAI-IL-Common-Object", 
+	"description": "Schema Definition of Common Object from GXAI", 
+	"type" : "object", 
+	"properties" : {
+	},
+	"$defs" : {
+		"objOrderRule" : {
+			"type" : "object",
+			"properties" : {
+				"odOpen" : { 
+					"type" : [ "object", "null" ], 
+					"properties" : {
+						"odSymbol" : { "type" : "string" }, 
+						"odLot" : { "$ref" : "#/$defs/objValueCal" }, 
+						"odType" : { "type" : "string", "enum" : [ "market", "limit", "stop" ] }, 
+						"odSide" : { "type" : "string", "enum" : [ "buy", "sell" ] }, 
+						"odPrice" : { 
+							"anyOf" : [
+								{ "$ref" : "#/$defs/objValueCal" }, 
+								{ "type" : [ "object", "null" ] }
+							]						
+						}, 
+						"odTp" : { 
+							"anyOf" : [
+								{ "$ref" : "#/$defs/objValueCal" }, 
+								{ "type" : [ "object", "null" ] }
+							]						
+						}, 
+						"odSl" : { 
+							"anyOf" : [
+								{ "$ref" : "#/$defs/objValueCal" }, 
+								{ "type" : [ "object", "null" ] }
+							]						
+						}, 
+						"odExpiryDate" : { 
+							"anyOf" : [
+								{ "$ref" : "#/$defs/objPeriod" }, 
+								{ "type" : [ "object", "null" ] }
+							]						
+						}, 
+					}, 
+					"required" : [ "odSymbol", "odLot", "odType", "odSide" ], 
+					"if" : {
+						"properties" : {
+							"odType" : { "enum" : [ "limit", "stop" ] }
+						}
+					}, 
+					"then" : {
+						"required" : [ "odPrice" ], 
+						"properties" : {
+							"odPrice" : { "$ref" : "#/$defs/objValueCal" }
+						}
+					}, 
+					"else" : {
+						"properties" : {							
+							"odPrice" : { "type" : [ "object", "null" ] }
+						}
+					}
+				},
+				"odClose" : { 
+					"type" : [ "object", "null" ], 
+					"properties" : {
+						"odSelectionRules" : { 
+							"type" : "array", 
+							"items" : { "$ref" : "#/$defs/objSelectionRule" } 
+						},
+						"odLot" : { "$ref" : "#/$defs/objValueCal" }, 
+						"odType" : { "type" : "string" },						 
+						"odPrice" : { 
+							"anyOf" : [
+								{ "$ref" : "#/$defs/objValueCal" }, 
+								{ "type" : [ "object", "null" ] }
+							]						
+						}
+					}, 
+					"required" : [ "odSelectionRules", "odLot", "odType" ], 
+					"if" : {
+						"properties" : {
+							"odType" : { "enum" : [ "limit", "stop" ] }
+						}
+					}, 
+					"then" : {
+						"required" : [ "odPrice" ], 
+						"properties" : {
+							"odPrice" : { "$ref" : "#/$defs/objValueCal" }
+						}
+					}, 
+					"else" : {
+						"properties" : {							
+							"odPrice" : { "type" : [ "object", "null" ] }
+						}
+					}
+				},
+				"odModify" : { 
+					"type" : [ "object", "null" ], 
+					"properties" : {
+						"odSelectionRules" : { 
+							"type" : "array", 
+							"items" : { "$ref" : "#/$defs/objSelectionRule" } 
+						},
+						"odLot" : { 
+							"anyOf" : [
+								{ "$ref" : "#/$defs/objValueCal" }, 
+								{ "type" : [ "object", "null" ] }
+							]
+						}, 
+						"odPrice" : { 
+							"anyOf" : [
+								{ "$ref" : "#/$defs/objValueCal" }, 
+								{ "type" : [ "object", "null" ] }
+							]
+						}, 
+						"odTp" : { 
+							"anyOf" : [
+								{ "$ref" : "#/$defs/objValueCal" }, 
+								{ "type" : [ "object", "null" ] }
+							]
+						}, 
+						"odSl" : { 
+							"anyOf" : [
+								{ "$ref" : "#/$defs/objValueCal" }, 
+								{ "type" : [ "object", "null" ] }
+							]
+						},  
+						"odExpiryDate" : { 
+							"anyOf" : [
+								{ "$ref" : "#/$defs/objPeriod" }, 
+								{ "type" : [ "object", "null" ] }
+							]						
+						} 
+					}, 
+					"anyOf" : [
+						{ "required" : [ "odLot" ], "properties" : { "odLot" : { "$ref" : "#/$defs/objValueCal" } } }, 
+						{ "required" : [ "odPrice" ], "properties" : { "odPrice" : { "$ref" : "#/$defs/objValueCal" } } }, 
+						{ "required" : [ "odTp" ], "properties" : { "odTp" : { "$ref" : "#/$defs/objValueCal" } } }, 
+						{ "required" : [ "odSl" ], "properties" : { "odSl" : { "$ref" : "#/$defs/objValueCal" } } }, 
+						{ "required" : [ "odExpiryDate" ], "properties" : { "odExpiryDate" : { "$ref" : "#/$defs/objPeriod" } } }
+					]
+				}
+			}, 
+			"anyOf" : [
+				{  
+					"required" : [ "odOpen" ], 
+					"properties" : {
+						"odOpen" : { "type" : "object" }
+					}
+				},
+				{  
+					"required" : [ "odClose" ], 
+					"properties" : {
+						"odClose" : { "type" : "object" }
+					}
+				},
+				{  
+					"required" : [ "odModify" ], 
+					"properties" : {
+						"odModify" : { "type" : "object" }
+					}
+				}
+			]
+		}, 
+		"objSelectionRule" : {
+			"type" : "object",
+			"properties" : {
+				"odSymbol" : { "type" : [ "string", "null" ] }, 
+				"odType" : { "type" : [ "string", "null" ], "enum" : [ "market", "limit", "stop", null ] }, 
+				"odSide" : { "type" : [ "string", "null" ], "enum" : [ "buy", "sell", null ] }, 
+				"odOpenClose" : { "type" : "string", "enum" : [ "O", "C" ] }, 
+				"selRules" : {
+					"type" : [ "array", "null" ], 
+					"items" : { "$ref" : "#/$defs/objRuleContent" }
+				},
+				"selMaxNum" : { "type" : [ "number", "null" ] }, 
+				"selSort" : { 
+					"anyOf" : [
+						{ "$ref" : "#/$defs/objSort" }, 
+						{ "type" : [ "object", "null" ] }
+					]					
+				}
+			}, 
+			"required" : [ "odOpenClose" ],
+			"if": {
+				"properties": {
+					"selMaxNum": { "type": "number" }
+				},
+				"required": [ "selMaxNum" ]
+			},
+			"then" : {
+				"required" : [ "selSort" ], 
+				"properties" : {
+					"selSort" : { "$ref" : "#/$defs/objSort" }
+				}
+			}, 
+			"else" : {
+				"properties" : {
+					"selSort" : { "type" : [ "object", "null" ] }
+				}
+			}
+		}, 
+		"objSort" : {
+			"type" : "object",
+			"properties" : {
+				"sortBase" : { "type" : "string" }, 
+				"sortIsAscending" : { "type" : "boolean" }
+			}, 
+			"required" : [ "sortBase", "sortIsAscending" ]
+		}, 
+		"objRuleContent" : {
+			"type" : "object",
+			"properties" : {
+				"rcUpper" : { 
+					"anyOf" : [
+						{ "$ref" : "#/$defs/objCompare" }, 
+						{ "type" : [ "object", "null" ] }
+					]		
+				},
+				"rcLower" : { 
+					"anyOf" : [
+						{ "$ref" : "#/$defs/objCompare" }, 
+						{ "type" : [ "object", "null" ] }
+					]		
+				},
+				"rcTime" : { 
+					"anyOf" : [
+						{ "$ref" : "#/$defs/objPeriod" }, 
+						{ "type" : [ "object", "null" ] }
+					]		
+				}				
+			}, 
+			"anyOf" : [
+				{ "required" : [ "rcUpper" ], "properties" : { "rcUpper" : { "$ref" : "#/$defs/objCompare" } } }, 
+				{ "required" : [ "rcLower" ], "properties" : { "rcLower" : { "$ref" : "#/$defs/objCompare" } } }, 
+				{ "required" : [ "rcTime" ], "properties" : { "rcTime" : { "$ref" : "#/$defs/objPeriod" } } }
+			]
+		}, 
+		"objCompare" : {
+			"type" : "object",
+			"properties" : {
+				"cmprIncludeEqual" : { "type" : "boolean" }, 
+				"cmprValueActive" : { "$ref" : "#/$defs/objValueCal" },
+				"cmprValuePassive" : { "$ref" : "#/$defs/objValueCal" }
+			}, 
+			"required" : [ "cmprIncludeEqual", "cmprValueActive", "cmprValuePassive" ]
+		}, 
+		"objValueCal" : {
+			"type" : "object",
+			"properties" : {
+				"vFormulaName" : { "type" : "string" }, 
+				"vParameters" : { 
+					"type" : "array", 
+					"items" : { "type" : "string" } 
+				},
+				"vAdjust" : { "type" : "number" }
+			}, 
+			"required" : [ "vFormulaName", "vParameters", "vAdjust" ]
+		}, 
+		"objPeriod" : {
+			"type" : "object",
+			"properties" : {
+				"tTerm" : { 
+					"anyOf" : [
+						{ "$ref" : "#/$defs/objTerm" }, 
+						{ "type" : [ "object", "null" ] }
+					]	
+				},
+				"tMoments" : { 
+					"type" : [ "array", "null" ] , 
+					"items" : { "$ref" : "#/$defs/objDatetimeIndi" } 
+				},
+				"tDuration" : { 
+					"anyOf" : [
+						{ "$ref" : "#/$defs/objDuration" }, 
+						{ "type" : [ "object", "null" ] }
+					]
+				}
+			}, 
+			"anyOf" : [
+				{ "required" : [ "tTerm" ], "properties" : { "tTerm" : { "$ref" : "#/$defs/objTerm" } } }, 
+				{ "required" : [ "tMoments" ], "properties" : { "tMoments" : { "type" : "array" } } }, 
+				{ "required" : [ "tDuration" ], "properties" : { "tDuration" : { "$ref" : "#/$defs/objDuration" } } }
+			]
+		},
+		"objTerm" : {
+			"type" : "object",
+			"properties" : {
+				"dtStart" : { "$ref" : "#/$defs/objDatetimeIndi" },
+				"dtEnd" : { "$ref" : "#/$defs/objDatetimeIndi" }
+			}, 
+			"required" : [ "dtStart", "dtEnd" ]
+		},
+		"objDuration" : {
+			"type" : "object",
+			"properties" : {
+				"dtSpan" : { "type" : "number" }, 
+				"dtUnit" : { "type" : "string", "enum" : [ "min", "hour", "day" ] },
+				"dtCompareBase" : { "type" : "string" } 
+			}, 
+			"required" : [ "dtSpan", "dtUnit", "dtCompareBase" ]
+		},
+		"objDatetimeIndi" : {
+			"type" : "object",
+			"properties" : {
+				"indiTime" : { "type" : "string" } ,
+				"indiWeekday" : { "type" : "integer", "minimum" : 0, "maximum" : 6 }  
+			}, 
+			"required" : [ "indiTime", "indiWeekday" ]
+		}
+	}
+}
