@@ -182,11 +182,11 @@
 				}
 			}, 
 			"required" : [ "odOpenClose" ],
-			"if" : {
-				"properties" : {
-					"selMaxNum" : { "type" : "number" },
-					"required": [ "selMaxNum" ]
-				}
+			"if": {
+				"properties": {
+					"selMaxNum": { "type": "number" }
+				},
+				"required": [ "selMaxNum" ]
 			},
 			"then" : {
 				"required" : [ "selSort" ], 
