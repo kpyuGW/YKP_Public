@@ -184,7 +184,8 @@
 			"required" : [ "odOpenClose" ],
 			"if" : {
 				"properties" : {
-					"selMaxNum" : { "type" : "number" }
+					"selMaxNum" : { "type" : "number" },
+					"required": [ "selMaxNum" ]
 				}
 			},
 			"then" : {
