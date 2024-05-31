@@ -140,14 +140,16 @@
 								{ "$ref" : "#/$defs/objPeriod" }, 
 								{ "type" : "null" }
 							]						
-						} 
+						},  
+						"odCancel" : { "type" : [ "boolean", "null"] } 
 					}, 
 					"anyOf" : [
 						{ "required" : [ "odLot" ], "properties" : { "odLot" : { "$ref" : "#/$defs/objValueCal" } } }, 
 						{ "required" : [ "odPrice" ], "properties" : { "odPrice" : { "$ref" : "#/$defs/objValueCal" } } }, 
 						{ "required" : [ "odTp" ], "properties" : { "odTp" : { "$ref" : "#/$defs/objValueCal" } } }, 
 						{ "required" : [ "odSl" ], "properties" : { "odSl" : { "$ref" : "#/$defs/objValueCal" } } }, 
-						{ "required" : [ "odExpiryDate" ], "properties" : { "odExpiryDate" : { "$ref" : "#/$defs/objPeriod" } } }
+						{ "required" : [ "odExpiryDate" ], "properties" : { "odExpiryDate" : { "$ref" : "#/$defs/objPeriod" } } }, 
+						{ "required" : [ "odCancel" ], "properties" : { "odCancel" : { "type" : "boolean" } } }
 					]
 				}
 			}, 
@@ -179,6 +181,7 @@
 				"odType" : { "type" : [ "string", "null" ], "enum" : [ "market", "limit", "stop", null ] }, 
 				"odSide" : { "type" : [ "string", "null" ], "enum" : [ "buy", "sell", null ] }, 
 				"odOpenClose" : { "type" : "string", "enum" : [ "O", "C" ] }, 
+				"selSameStrategy" :  { "type" :  "boolean" },
 				"selRules" : {
 					"type" : [ "array", "null" ], 
 					"items" : { "$ref" : "#/$defs/objRuleContent" }
@@ -191,7 +194,7 @@
 					]					
 				}
 			}, 
-			"required" : [ "odOpenClose" ],
+			"required" : [ "odOpenClose", "selSameStrategy" ],
 			"if": {
 				"properties": {
 					"selMaxNum": { "type": "number" }
@@ -313,10 +316,14 @@
 		"objDatetimeIndi" : {
 			"type" : "object",
 			"properties" : {
-				"indiTime" : { "type" : "string" } ,
-				"indiWeekday" : { "type" : "integer", "minimum" : 0, "maximum" : 6 }  
+				"indiTime": { "type": "string", "format" : "time" },
+				"indiDate" : { "type" : [ "string", "null" ], "format" :  "date" },
+				"indiWeekday" : { "type" : [ "integer", "null" ], "minimum" : 0, "maximum" : 6 }  
 			}, 
-			"required" : [ "indiTime", "indiWeekday" ]
+			"oneOf" : [
+				{ "required" : [ "indiDate" ], "properties" : { "indiDate" : { "type" : "string" } } }, 
+				{ "required" : [ "indiWeekday" ], "properties" : { "indiWeekday" : { "type" : "integer" } } } 
+			]			
 		}
 	}
 }
